@@ -14,6 +14,7 @@ const Home = () => {
   };
 
   const handlePress = () => {
+    console.log("dsds");
     navigate("/Calculator");
   };
 

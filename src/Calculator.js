@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Calculator() {
   const [darkTheme, setDarkTheme] = useState(false);
@@ -62,6 +63,7 @@ export default function Calculator() {
   };
 
   const getColor = (light, dark) => (darkTheme ? dark : light);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -75,6 +77,14 @@ export default function Calculator() {
         alignItems: "center",
       }}
     >
+      <div style={styles.btnGroup}>
+        <button style={styles.button} onClick={() => navigate("/")}>
+          Back
+        </button>
+        <button style={styles.button} onClick={() => navigate("/feedback")}>
+          FeedBack Form
+        </button>
+      </div>
       <label style={{ color: getColor(colors.dark, colors.light) }}>
         <input
           type="checkbox"
@@ -87,11 +97,13 @@ export default function Calculator() {
       <div
         style={{
           fontSize: 40,
-          width: "100%",
+          width: 380,
           textAlign: "right",
           paddingRight: 20,
+          backgroundColor: getColor(colors.light1, colors.dark1),
           color: getColor(colors.dark, colors.light),
           marginTop: 160,
+          //   marginRight: 160,
           paddingBottom: 20,
         }}
       >
@@ -99,13 +111,14 @@ export default function Calculator() {
       </div>
       <div
         style={{
+          width: 400,
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
           backgroundColor: getColor(colors.light1, colors.dark1),
           boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)",
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
+          //   borderTopLeftRadius: 20,
+          //   borderTopRightRadius: 20,
         }}
       >
         <Btn title="C" type="top" />
@@ -132,3 +145,47 @@ export default function Calculator() {
     </div>
   );
 }
+const styles = {
+  outerContainer: {
+    flex: 1,
+    backgroundColor: "#f9f9f9", // light color for the outer body
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    padding: 16,
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+    width: "50%",
+    height: "50%",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  containerHovered: {
+    boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.5)",
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  btnGroup: {
+    display: "flex",
+    gap: "1rem",
+    marginBottom: "2rem",
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    borderRadius: 8,
+    padding: "16px 32px",
+    border: "none",
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    cursor: "pointer",
+  },
+};
